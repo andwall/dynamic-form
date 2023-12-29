@@ -1,12 +1,12 @@
 [
   {
-    "page_label": "Job Application Form",
+    "page_label": "CCAEFISS Search",
     "fields": [
       {
-        "field_id": "english_name",
-        "field_label": "Name",
+        "field_id": "V Number",
+        "field_label": "V Number",
         "field_mandatory": "yes",
-        "field_placeholder": "Enter name",
+        "field_placeholder": "Enter V Number",
         "field_type": "text",
         "field_value": ""
       },
@@ -15,19 +15,20 @@
         "field_label": "Email",
         "field_mandatory": "yes",
         "field_placeholder": "Enter email",
-        "field_type": "text"
+        "field_type": "text",
+        "field_value": ""
       },
       {
-        "field_id": "employement",
-        "field_label": "Employment Desired",
-        "field_value": "Part-Time",
+        "field_id": "status",
+        "field_label": "Status",
+        "field_value": "Active",
         "field_mandatory": "yes",
         "field_options": [
           {
-            "option_label": "Full-Time"
+            "option_label": "Active"
           },
           {
-            "option_label": "Part-Time"
+            "option_label": "Inactive"
           }
         ],
         "field_type": "select"

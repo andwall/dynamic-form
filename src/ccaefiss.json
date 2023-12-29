@@ -1,0 +1,32 @@
+[
+  {
+    "page_label": "CCAEFISS Search",
+    "fields": [
+      {
+        "field_id": "v_number",
+        "field_section": "main",
+        "field_label": "V number",
+        "field_mandatory": "yes",
+        "field_placeholder": "Enter V number",
+        "field_type": "text",
+        "field_value": ""
+      },
+      {
+        "field_id": "status",
+        "field_section": "main",
+        "field_label": "Status",
+        "field_value": "Active",
+        "field_mandatory": "yes",
+        "field_options": [
+          {
+            "option_label": "Active"
+          },
+          {
+            "option_label": "Inactive"
+          }
+        ],
+        "field_type": "select"
+      }
+    ]
+  }
+]

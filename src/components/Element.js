@@ -1,3 +1,4 @@
+/* Responsible for displaying correct componenet based on field type */
 import React from 'react'
 import Checkbox from './elements/Checkbox';
 import Select from './elements/Select';
@@ -36,4 +37,4 @@ const Element = ({ field: { field_type, field_id, field_label, field_placeholder
   }
 }
 
-export default Element
+export default Element;

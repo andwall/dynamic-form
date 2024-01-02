@@ -28,16 +28,42 @@ function App() {
       reportType: elements.sections[1].fields[0].field_value,
       impactCase: elements.sections[1].fields[1].field_value
     }
+    // console.log("Search Parameters: ");
+    // console.log(search);
 
-    axios.get('http://localhost:3001/cases/search')
+    //get all cases
+    axios.get('http://localhost:3001/cases')
     .then(res => {
-      
-      if(res.data.lenth > 0) console.log("Working");
-      else console.log("no data");
+      if(res.data.length > 0){
+        console.log("Cases found for /cases: ");
+        console.log(res.data);
+      } 
+      else console.log("no cases found");
     })
     .catch(err => console.log(err))
 
+
+    //get specific cases
+    axios({
+      method: 'post',
+      url: 'http://localhost:3001/cases/search',
+      data: search
+    })
+    .then( (res) => {
+      console.log("Search Query res: ")
+      console.log(res)
+    })
+    // axios.get('http://localhost:3001/cases/search', search)
+    // .then(res => {
+    //   if(res.data.length > 0){
+    //     console.log("Cases found for /cases/search: ");
+    //     console.log(res.data);
+    //   } 
+    //   else console.log("no cases found");
+    // })
+    // .catch(err => console.log(err))
   }
+  
 
   //update the elements with new inputted values
   const handleChange = (id, event) => {

@@ -1,3 +1,4 @@
+//Models the MongoDB collection
 const mongoose = require('mongoose');
 
 const caseSchema = new mongoose.Schema({

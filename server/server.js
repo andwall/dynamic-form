@@ -1,3 +1,4 @@
+/* Responsible for init server and connecting to MongoDB */
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');

@@ -1,27 +1,25 @@
-// import formJSON from './formElement.json';
 import ccaefissJSON from './ccaefiss.json'
 import { useState, useEffect } from 'react';
-// import Element from './components/Element';
 import { FormContext } from './FormContext';
 import { GcdsButton } from '@cdssnc/gcds-components-react';
 import Section from './components/Section';
 import axios from 'axios';
 
-
 function App() {
-  const[showCases, setShowCases] = useState(false);
-  //declaring elements state
+  //Getting and setting elements from json form
   const [elements, setElements] = useState(ccaefissJSON[0]);
   useEffect(() => {
     setElements(ccaefissJSON[0]);
   }, []);
 
-  //derefernce the fields and page label from elements
+  //derefernce the sections and page label from the form
   const { sections, page_label } = elements ?? {};
 
   //TODO pass JSON "elements" to sever
   const handleSearch = (e) => {
     e.preventDefault();
+
+    //Get search data to search for from the form
     const search = {
       vNumber: elements.sections[0].fields[0].field_value,
       status: elements.sections[0].fields[1].field_value,
@@ -42,8 +40,7 @@ function App() {
     })
     .catch(err => console.log(err))
 
-
-    //get specific cases
+    //get specific cases with search data
     axios({
       method: 'post',
       url: 'http://localhost:3001/cases/search',
@@ -52,18 +49,8 @@ function App() {
     .then( (res) => {
       console.log("Search Query res: ")
       console.log(res)
-    })
-    // axios.get('http://localhost:3001/cases/search', search)
-    // .then(res => {
-    //   if(res.data.length > 0){
-    //     console.log("Cases found for /cases/search: ");
-    //     console.log(res.data);
-    //   } 
-    //   else console.log("no cases found");
-    // })
-    // .catch(err => console.log(err))
+    })   
   }
-  
 
   //update the elements with new inputted values
   const handleChange = (id, event) => {
@@ -90,12 +77,6 @@ function App() {
     // console.log(elements);
   }
 
-  const handleShowCases = () => {
-    setShowCases(!showCases);
-    console.log(showCases);
-  }
-
-//  represent states that you want to share via func handleChange
   return (
     <FormContext.Provider value={ { handleChange } }> 
       <div className="App container">
@@ -105,7 +86,6 @@ function App() {
           <GcdsButton style={{paddingTop:"25px"}} type="button" onClick={(e) => handleSearch(e)}>Search</GcdsButton>
       </div>
     </FormContext.Provider>
-
   );
 }
 

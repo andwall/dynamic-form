@@ -1,3 +1,4 @@
+/* Responsible for displaying an input element */
 import React, {useContext} from 'react';
 import { FormContext } from '../../FormContext';
 import { GcdsInput } from '@cdssnc/gcds-components-react';
@@ -14,11 +15,7 @@ const InputEl = ({ field_id, field_label, field_placeholder, field_value }) => {
     type="text"
   >
   </GcdsInput>
-    // <div className="mb-3">
-    //   <label htmlFor="exampleInputEmail1" className="form-label">{field_label}</label>
-    //   <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder={field_placeholder ? field_placeholder : ''} value={field_value} onChange={e => handleChange(field_id, e)}/>
-    // </div>
   )
 }
 
-export default InputEl
+export default InputEl;

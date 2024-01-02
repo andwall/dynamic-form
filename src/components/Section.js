@@ -1,3 +1,4 @@
+/* Responsible for displaying "sections" (toggle drop downs) */
 import React from 'react';
 import { GcdsDetails } from '@cdssnc/gcds-components-react';
 import Element from './Element';
@@ -10,4 +11,4 @@ const Section = ({section}) => {
   )
 }
 
-export default Section
+export default Section;

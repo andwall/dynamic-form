@@ -1,3 +1,4 @@
+/* Responsible for displaying a checkbox element */
 import React, {useContext} from 'react';
 import { FormContext } from '../../FormContext';
 
@@ -12,4 +13,4 @@ const Checkbox = ({ field_id, field_label, field_value }) => {
   )
 }
 
-export default Checkbox
+export default Checkbox;

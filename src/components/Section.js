@@ -2,10 +2,10 @@ import React from 'react';
 import { GcdsDetails } from '@cdssnc/gcds-components-react';
 import Element from './Element';
 
-const Section = ({ section: { name, fields }}) => {
+const Section = ({section}) => {
   return (
-    <GcdsDetails detailsTitle={ name }>
-      {fields ? fields.map((field, i) => <Element key={i} field={field}/>) : null}
+    <GcdsDetails style={{padding: "15px"}} detailsTitle={ section.name }>
+      {section.fields ? section.fields.map((field, i) => <Element key={i} field={field}/>) : null}
     </GcdsDetails>
   )
 }

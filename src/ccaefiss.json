@@ -3,7 +3,7 @@
     "page_label": "CCAEFISS Search",
     "sections": [
       {
-        "name": "main",
+        "name": "Main",
         "fields": [
           {
             "field_id": "v_number",
@@ -16,9 +16,13 @@
           {
             "field_id": "status",
             "field_label": "Status",
+            "field_placeholder": "Please select an option",
             "field_value": "Active",
             "field_mandatory": "yes",
             "field_options": [
+              {
+                "option_label": "Any"
+              },
               {
                 "option_label": "Active"
               },
@@ -36,8 +40,12 @@
           {
             "field_id": "report_type",
             "field_label": "Report Type",
-            "field_value": "",
+            "field_placeholder": "Please select an option",
+            "field_value": "Initial report",
             "field_options": [
+              {
+                "option_label": "Any"
+              },
               {
                 "option_label": "Initial report"
               },
@@ -52,7 +60,7 @@
             "field_label": "Impact case",
             "field_placeholder": "Impact case",
             "field_type": "checkbox",
-            "field_value": "unchecked"
+            "field_value": false
           }
         ]
       }

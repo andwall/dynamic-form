@@ -5,24 +5,38 @@ import { useState, useEffect } from 'react';
 import { FormContext } from './FormContext';
 import { GcdsButton } from '@cdssnc/gcds-components-react';
 import Section from './components/Section';
+import axios from 'axios';
+
 
 function App() {
-
+  const[showCases, setShowCases] = useState(false);
   //declaring elements state
-  const [elements, setElements] = useState(undefined);
+  const [elements, setElements] = useState(ccaefissJSON[0]);
   useEffect(() => {
     setElements(ccaefissJSON[0]);
-    console.log(elements)
   }, []);
 
   //derefernce the fields and page label from elements
   const { sections, page_label } = elements ?? {};
 
-
   //TODO pass JSON "elements" to sever
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log(elements);
+    const search = {
+      vNumber: elements.sections[0].fields[0].field_value,
+      status: elements.sections[0].fields[1].field_value,
+      reportType: elements.sections[1].fields[0].field_value,
+      impactCase: elements.sections[1].fields[1].field_value
+    }
+
+    axios.get('http://localhost:3001/cases/search')
+    .then(res => {
+      
+      if(res.data.lenth > 0) console.log("Working");
+      else console.log("no data");
+    })
+    .catch(err => console.log(err))
+
   }
 
   //update the elements with new inputted values
@@ -50,20 +64,22 @@ function App() {
     // console.log(elements);
   }
 
+  const handleShowCases = () => {
+    setShowCases(!showCases);
+    console.log(showCases);
+  }
+
 //  represent states that you want to share via func handleChange
   return (
     <FormContext.Provider value={ { handleChange } }> 
       <div className="App container">
         <h3>{page_label}</h3>
-        <form>
-          {sections ? sections.map((section, i) => <Section key={i} section={section}/>) : null}
+          {sections ? sections.map((section, i) => <Section key={i} section={ section }/>) : null}
 
-          <GcdsButton type="button" onClick={(e) => handleSearch(e)}>Search</GcdsButton>
-        </form>
-
-        <Section />
+          <GcdsButton style={{paddingTop:"25px"}} type="button" onClick={(e) => handleSearch(e)}>Search</GcdsButton>
       </div>
     </FormContext.Provider>
+
   );
 }
 

@@ -25,6 +25,9 @@
         "field_mandatory": "yes",
         "field_options": [
           {
+            "option_label": "Any"
+          },
+          {
             "option_label": "Active"
           },
           {

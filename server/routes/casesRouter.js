@@ -17,7 +17,8 @@ router.route('/search').post((req, res) => {
 
   CaseModel.findOne({v_number: vNumber})
   .then((result) =>{
-    if(result === null) res.send({});
+    console.log(result)
+    if(result === null) res.status(404).send('Sorry could not find any cases');
     else res.send(result);
   })
   .catch((err) => res.status(400).json('Error: ' + err)); 

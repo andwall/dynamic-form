@@ -1,4 +1,5 @@
-import ccaefissJSON from './ccaefiss.json'
+import ccaefissJSON from './ccaefiss.json';
+import ccaefissJSON2 from './ccaefiss2.json';
 import { useState, useEffect } from 'react';
 import { FormContext } from './FormContext';
 import { GcdsButton, GcdsContainer, GcdsHeader } from '@cdssnc/gcds-components-react';
@@ -10,9 +11,9 @@ import "./styles.css"
 function App() {
 
   /* Getting and setting elements from json form */
-  const [elements, setElements] = useState(ccaefissJSON[0]);
+  const [elements, setElements] = useState(ccaefissJSON2[0]);
   useEffect(() => {
-    setElements(ccaefissJSON[0]);
+    setElements(ccaefissJSON2[0]);
   }, []);
 
   /* Derefernce the sections and page label from the form */
@@ -33,6 +34,18 @@ function App() {
       impactCase: elements.sections[1].fields[1].field_value
     }
 
+    /* Show data from form */
+    console.log(search);
+
+    const formData = {};
+    console.log(elements)
+    console.log(elements.length)
+    for(let i = 0; i < elements.sections.length; i++){
+      for(let j = 0; j < elements.sections[i].fields.length; j++){
+        formData[elements.sections[i].fields[j].field_id] = elements.sections[i].fields[j].field_value;
+      }
+    }
+    console.log(formData)
     /* Get all cases */
     // axios.get('http://localhost:3001/cases')
     // .then(res => {
@@ -55,7 +68,7 @@ function App() {
     })
     .catch(err => {
       setSearchResults(null);
-      console.log(err)
+      console.log(err);
     }) 
 
   }
@@ -89,8 +102,8 @@ function App() {
     <FormContext.Provider value={ { handleChange } }> 
       <div className="App container">
         <GcdsHeader></GcdsHeader>
-        <GcdsContainer size='lg' padding='250'>
         <h1>{page_label}</h1>
+        <GcdsContainer size='full' border padding='300' >
           {sections ? sections.map((section, i) => <Section key={i} section={ section }/>) : null}
 
           <GcdsButton style={{paddingTop:"25px"}} type="button" onClick={(e) => handleSearch(e)}>Search</GcdsButton>

@@ -13,9 +13,9 @@ router.route('/').get((req, res) => {
 
 /* Gets specific cases */
 router.route('/search').post((req, res) => {
-  const { vNumber, status, reportType, impactCase } = req.body;
+  const { v_number, status, reportType, impactCase } = req.body;
 
-  CaseModel.findOne({v_number: vNumber})
+  CaseModel.findOne({v_number: v_number})
   .then((result) =>{
     console.log(result)
     if(result === null) res.status(404).send('Sorry could not find any cases');

@@ -35,17 +35,15 @@ function App() {
     }
 
     /* Show data from form */
-    console.log(search);
 
     const formData = {};
     console.log(elements)
-    console.log(elements.length)
     for(let i = 0; i < elements.sections.length; i++){
       for(let j = 0; j < elements.sections[i].fields.length; j++){
         formData[elements.sections[i].fields[j].field_id] = elements.sections[i].fields[j].field_value;
       }
     }
-    console.log(formData)
+    // console.log(formData)
     /* Get all cases */
     // axios.get('http://localhost:3001/cases')
     // .then(res => {
@@ -61,7 +59,7 @@ function App() {
     axios({
       method: 'post',
       url: 'http://localhost:3001/cases/search',
-      data: search
+      data: formData
     })
     .then(res => {
       setSearchResults(res.data);

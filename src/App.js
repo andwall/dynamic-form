@@ -1,58 +1,77 @@
-import ccaefissJSON from './ccaefiss.json'
+import ccaefissJSON from './ccaefiss.json';
+import ccaefissJSON2 from './ccaefiss2.json';
 import { useState, useEffect } from 'react';
 import { FormContext } from './FormContext';
-import { GcdsButton } from '@cdssnc/gcds-components-react';
+import { GcdsButton, GcdsContainer, GcdsHeader } from '@cdssnc/gcds-components-react';
 import Section from './components/Section';
+import Case from './components/Case';
 import axios from 'axios';
+import "./styles.css"
 
 function App() {
-  //Getting and setting elements from json form
-  const [elements, setElements] = useState(ccaefissJSON[0]);
+
+  /* Getting and setting elements from json form */
+  const [elements, setElements] = useState(ccaefissJSON2[0]);
   useEffect(() => {
-    setElements(ccaefissJSON[0]);
+    setElements(ccaefissJSON2[0]);
   }, []);
 
-  //derefernce the sections and page label from the form
+  /* Derefernce the sections and page label from the form */
   const { sections, page_label } = elements ?? {};
 
-  //TODO pass JSON "elements" to sever
+  /* Store search results */
+  const [searchResults, setSearchResults] = useState(null);
+
+  /* Responsible for passing JSON "elements" to server */
   const handleSearch = (e) => {
     e.preventDefault();
 
-    //Get search data to search for from the form
+    /* Get search data to search from the form */
     const search = {
       vNumber: elements.sections[0].fields[0].field_value,
       status: elements.sections[0].fields[1].field_value,
       reportType: elements.sections[1].fields[0].field_value,
       impactCase: elements.sections[1].fields[1].field_value
     }
-    // console.log("Search Parameters: ");
-    // console.log(search);
 
-    //get all cases
-    axios.get('http://localhost:3001/cases')
-    .then(res => {
-      if(res.data.length > 0){
-        console.log("Cases found for /cases: ");
-        console.log(res.data);
-      } 
-      else console.log("no cases found");
-    })
-    .catch(err => console.log(err))
+    /* Show data from form */
 
-    //get specific cases with search data
+    const formData = {};
+    console.log(elements)
+    for(let i = 0; i < elements.sections.length; i++){
+      for(let j = 0; j < elements.sections[i].fields.length; j++){
+        formData[elements.sections[i].fields[j].field_id] = elements.sections[i].fields[j].field_value;
+      }
+    }
+    // console.log(formData)
+    /* Get all cases */
+    // axios.get('http://localhost:3001/cases')
+    // .then(res => {
+    //   if(res.data.length > 0){
+    //     console.log("Cases found for /cases: ");
+    //     console.log(res.data);
+    //   } 
+    //   else console.log("no cases found");
+    // })
+    // .catch(err => console.log(err))
+
+    /* Get specific cases with search data */
     axios({
       method: 'post',
       url: 'http://localhost:3001/cases/search',
-      data: search
+      data: formData
     })
-    .then( (res) => {
-      console.log("Search Query res: ")
-      console.log(res)
-    })   
+    .then(res => {
+      setSearchResults(res.data);
+    })
+    .catch(err => {
+      setSearchResults(null);
+      console.log(err);
+    }) 
+
   }
 
-  //update the elements with new inputted values
+  /* Update the elements with new inputted values */
   const handleChange = (id, event) => {
     const newElements = {...elements};
     newElements.sections.forEach(section => {
@@ -80,10 +99,17 @@ function App() {
   return (
     <FormContext.Provider value={ { handleChange } }> 
       <div className="App container">
-        <h3>{page_label}</h3>
+        <GcdsHeader></GcdsHeader>
+        <h1>{page_label}</h1>
+        <GcdsContainer size='full' border padding='300' >
           {sections ? sections.map((section, i) => <Section key={i} section={ section }/>) : null}
 
           <GcdsButton style={{paddingTop:"25px"}} type="button" onClick={(e) => handleSearch(e)}>Search</GcdsButton>
+        </GcdsContainer>
+
+        <GcdsContainer size='lg' padding='250'>
+          {searchResults !== null ? <Case searchResults={ searchResults } /> : null }
+        </GcdsContainer>
       </div>
     </FormContext.Provider>
   );

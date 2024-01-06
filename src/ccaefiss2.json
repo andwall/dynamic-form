@@ -1,0 +1,132 @@
+[
+  {
+    "page_label": "CCAEFISS Search",
+    "sections": [
+      {
+        "name": "Main",
+        "fields": [
+          {
+            "field_id": "v_number",
+            "field_label": "V number",
+            "field_mandatory": "yes",
+            "field_placeholder": "Enter V number",
+            "field_type": "text",
+            "field_value": ""
+          },
+          {
+            "field_id": "status",
+            "field_label": "Status",
+            "field_placeholder": "Please select an option",
+            "field_value": "Any",
+            "field_mandatory": "yes",
+            "field_options": [
+              {
+                "option_label": "Any"
+              },
+              {
+                "option_label": "Active"
+              },
+              {
+                "option_label": "Inactive"
+              }
+            ],
+            "field_type": "select"
+          }
+        ]
+      },
+      {
+        "name": "Case Information",
+        "fields": [
+          {
+            "field_id": "report_type",
+            "field_label": "Report Type",
+            "field_placeholder": "Please select an option",
+            "field_value": "Any",
+            "field_options": [ 
+              {
+                "option_label": "Any"
+              },
+              {
+                "option_label": "Initial report"
+              },
+              {
+                "option_label": "Follow up report"
+              }
+            ],
+            "field_type": "select"
+          },
+          {
+            "field_id": "impact_case",
+            "field_label": "Impact case",
+            "field_placeholder": "Impact case",
+            "field_type": "checkbox",
+            "field_value": false
+          },
+          {
+            "field_id": "aefi_id",
+            "field_label": "AEFI ID",
+            "field_placeholder": "Enter an AEFI ID",
+            "field_type": "text",
+            "field_value": ""
+          }
+        ]
+      },
+      {
+        "name": "At time of immunization",
+        "fields": [
+          {
+            "field_id": "province_territory",
+            "field_label": "Province/Territory",
+            "field_placeholder": "Please select an option",
+            "field_value": "Any",
+            "field_options": [
+              {
+                "option_label": "Any"
+              },
+              {
+                "option_label": "Alberta"
+              },
+              {
+                "option_label": "British Columbia"
+              },
+              {
+                "option_label": "Manitoba"
+              },
+              {
+                "option_label": "New Brunswick"
+              },
+              {
+                "option_label": "Nefoundland and Labrador"
+              },
+              {
+                "option_label": "Nova Scotia"
+              },
+              {
+                "option_label": "Ontario"
+              },
+              {
+                "option_label": "Prince Edward Island"
+              },
+              {
+                "option_label": "Quebec"
+              },
+              {
+                "option_label": "Saskatchewan"
+              },
+              {
+                "option_label": "Northwest Territories"
+              },
+              {
+                "option_label": "Nunavut"
+              },
+              {
+                "option_label": "Yukon"
+              }
+            ],
+            "field_type": "select"
+          }
+        ]
+      }
+    ]
+  }
+]
